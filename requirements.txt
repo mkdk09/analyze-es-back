@@ -1,0 +1,5 @@
+Flask
+gensim
+gunicorn
+python-dotenv
+flask-cors
