@@ -14,10 +14,12 @@ model = Doc2Vec.load('doc2vec.model')
 yahoo_url = 'https://jlp.yahooapis.jp/MAService/V1/parse'
 client_id = settings.ID
 
-@app.route("/")
+@app.route("/", methods=['POST'])
 @cross_origin()
-def get():
-    sentence = "テストの文です。"
+def post():
+    input_data = request.json
+    # sentence = "テストの文です。"
+    sentence = input_data['text']
     word_list = []
 
     data = {
@@ -33,7 +35,8 @@ def get():
     for e in root.getiterator('{urn:yahoo:jp:jlp}surface'):
         word_list.append(e.text)
 
-    topn = 30
+    # topn = 30
+    topn = input_data['topn']
     result = model.docvecs.most_similar([model.infer_vector(word_list)], topn=topn)
     print(result)
 
