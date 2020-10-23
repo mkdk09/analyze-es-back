@@ -18,7 +18,6 @@ client_id = settings.ID
 @cross_origin()
 def post():
     input_data = request.json
-    # sentence = "テストの文です。"
     sentence = input_data['text']
     word_list = []
 
@@ -35,7 +34,6 @@ def post():
     for e in root.getiterator('{urn:yahoo:jp:jlp}surface'):
         word_list.append(e.text)
 
-    # topn = 30
     topn = input_data['topn']
     result = model.docvecs.most_similar([model.infer_vector(word_list)], topn=topn)
     print(result)
@@ -48,7 +46,6 @@ def post():
     json_data = json.dumps(dict_data, ensure_ascii=False, indent=2)
     print(json_data)
     return json_data
-
 
 if __name__ == '__main__':
     app.run()
