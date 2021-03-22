@@ -40,8 +40,9 @@ def post():
 
     dict_data = {}
     for i in range(topn):
-        key = str(i+1) + '位'
-        dict_data[key] = result[i][0]
+        # key = str(i+1) + '位'
+        company_key = result[i][0]
+        dict_data[company_key] = result[i][1]
 
     json_data = json.dumps(dict_data, ensure_ascii=False, indent=2)
     print(json_data)
